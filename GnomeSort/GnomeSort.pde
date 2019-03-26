@@ -21,13 +21,32 @@ void setup() {
   }
   //recalculate rect width
   rectWidth = width/numNumbers;
-  
- //call drawRect pass -1 and -1.
+
+  //call drawRect pass -1 and -1.
   drawRect(-1, -1);
 }
-
-void gnomeSortStep(){
-  
+void draw() {
+  if (sorted==false) {
+    gnomeSortStep();
+    drawRect(-1, -1);
+  } else {
+    noLoop();
+  }
+}
+void gnomeSortStep() {
+  if (numbers[step] > numbers[step+1]&&sorted==false) {
+    int temp = numbers[step];
+    numbers[step] =numbers[step+1];
+    numbers[step+1] = temp;
+    if (step!=0) {
+      step--;
+    }
+  } else {
+    step++;
+  }
+  if (step==19) {
+    sorted = true;
+  }
 }
 //takes two args, the indexes of the rectangles being compared...
 void drawRect(int a, int b) {
